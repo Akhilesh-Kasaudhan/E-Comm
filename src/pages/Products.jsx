@@ -41,27 +41,27 @@ export default function Products() {
       {/* Main Section */}
       <main className="flex-1">
         {/* Hero Section */}
-        <div className="h-64 bg-[#40bfff] w-full flex justify-between gap-4">
-          <div className="flex-1 flex flex-col justify-center text-white px-8">
+        <div className="h-88 bg-[#40bfff] w-full flex justify-between gap-4">
+          <div className="flex-1 flex flex-col justify-center text-white px-8 max-w-[400px]">
             <h2 className="text-2xl font-bold">Adidas Men Running Sneakers</h2>
             <p className="mt-2 text-sm opacity-80">
               Performance and Design. Taken right to the edge.
             </p>
-            <button className="mt-4 bg-white text-[#40bfff] px-4 py-2 rounded">
+            <span className="mt-4 text-md font-semibold hover:border-b-2 hover:border-b-white cursor-pointer w-max">
               SHOP NOW
-            </button>
+            </span>
           </div>
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex items-center justify-center min-h[221px] min-w-[442px] ">
             <img
-              src="https://pngimg.com/d/running_shoes_PNG5826.png"
+              src="/hero.png"
               alt="hero"
-              className="max-h-56 object-contain"
+              className="max-h-56 object-contain -rotate-y-180  "
             />
           </div>
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 mt-6">
           {visibleProducts.map((p) => (
             <ProductCard key={p.id} product={p} highlightColor={color} />
           ))}

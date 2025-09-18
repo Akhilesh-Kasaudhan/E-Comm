@@ -1,97 +1,62 @@
 import React from "react";
+import { Range } from "react-range";
 
 export default function FilterPanel({
-  totalCount,
-  sort,
-  setSort,
+  priceRange,
+  setPriceRange,
   color,
   setColor,
   categories,
   selectedCategory,
   onSelectCategory,
-  priceRange,
-  setPriceRange,
 }) {
   const [min, max] = priceRange;
 
   return (
-    <div className="mt-6">
-      {/* Sorting */}
-      <div className="flex justify-between items-center mb-4">
-        <span className="text-sm text-gray-600">
-          {totalCount} products found
-        </span>
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
-          className="border p-2 rounded"
-        >
-          <option value="name_asc">Name (A–Z)</option>
-          <option value="name_desc">Name (Z–A)</option>
-          <option value="price_asc">Price (Low–High)</option>
-          <option value="price_desc">Price (High–Low)</option>
-          <option value="popularity_desc">Popularity</option>
-        </select>
-      </div>
-
+    <div className="space-y-6 p-4 bg-white rounded shadow-sm">
       {/* Price Range */}
-      <div className="mb-6">
-        <h5 className="font-semibold mb-2">Price Range</h5>
-        <div className="flex gap-2 items-center">
-          <input
-            type="number"
-            value={min}
-            min="0"
-            max={max}
-            onChange={(e) => setPriceRange([Number(e.target.value), max])}
-            className="w-20 border rounded px-2 py-1"
-          />
-          <span>–</span>
-          <input
-            type="number"
-            value={max}
-            min={min}
-            max="9999"
-            onChange={(e) => setPriceRange([min, Number(e.target.value)])}
-            className="w-20 border rounded px-2 py-1"
-          />
-        </div>
-        <div className="flex gap-2 mt-2 items-center">
-          <input
-            type="range"
-            min="0"
-            max="9999"
-            step="10"
-            value={min}
-            onChange={(e) => setPriceRange([Number(e.target.value), max])}
-            className="w-full"
-          />
-          <input
-            type="range"
-            min="0"
-            max="9999"
-            step="10"
-            value={max}
-            onChange={(e) => setPriceRange([min, Number(e.target.value)])}
-            className="w-full"
-          />
-        </div>
-        <span className="text-sm text-gray-600">
-          ${min} – ${max}
-        </span>
+      <div>
+        <h5 className="font-semibold mb-2 uppercase text-sm">Prices</h5>
+        <p className="text-sm text-gray-600 mb-1">
+          Range:{" "}
+          <span className="font-medium">
+            ${min} – ${max}
+          </span>
+        </p>
+        <Range
+          step={10}
+          min={0}
+          max={5299}
+          values={priceRange}
+          onChange={(values) => setPriceRange(values)}
+          renderTrack={({ props, children }) => (
+            <div
+              {...props}
+              className="h-2 w-full rounded bg-gray-200"
+              style={{ ...props.style }}
+            >
+              {children}
+            </div>
+          )}
+          renderThumb={({ props }) => (
+            <div
+              {...props}
+              className="w-4 h-4 bg-blue-500 rounded-full shadow cursor-pointer"
+            />
+          )}
+        />
       </div>
 
-      {/* Color Filter */}
-      <div className="mb-6">
-        <h5 className="font-semibold mb-2">Color</h5>
-        <div className="flex gap-2">
-          {["black", "blue", "grey", "white", "brown"].map((c) => (
-            <button
+      <div>
+        <h5 className="font-semibold mb-2 uppercase text-sm">Color</h5>
+        <div className="flex gap-3">
+          {["blue", "brown", "black", "grey", "green"].map((c) => (
+            <span
               key={c}
               aria-label={c}
               onClick={() => setColor(color === c ? null : c)}
-              className={`w-6 h-6 rounded-full border ${
-                color === c ? "ring-2 ring-offset-2" : ""
+              className={`w-6 h-6 rounded-full border-2 ${
+                color === c ? "ring-2 ring-offset-2 ring-blue-500" : ""
               }`}
               style={{ background: c }}
             />
@@ -99,7 +64,6 @@ export default function FilterPanel({
         </div>
       </div>
 
-      {/* Category Filter */}
       <div>
         <h5 className="font-semibold mb-2">Categories</h5>
         {categories.map((c) => (

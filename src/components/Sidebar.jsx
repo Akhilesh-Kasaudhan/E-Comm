@@ -14,18 +14,32 @@ export default function Sidebar({
   setPriceRange,
 }) {
   return (
-    <aside className="w-[355px] h-full p-4 hidden md:block border-r bg-white">
+    <aside className=" w-64 md:min-w-[355px] h-full p-4 hidden md:block border-r bg-white">
       {/* Hot Deals (Static Section) */}
-      <div>
-        <h4 className="font-semibold mb-4">Hot Deals</h4>
-        <ul className="space-y-2 text-gray-700">
-          <li>Nike (2)</li>
-          <li className="text-blue-500">Airmax (48)</li>
-          <li>Nike (14)</li>
-          <li>Adidas (15)</li>
-          <li>Vans (23)</li>
-          <li>All Stars (1)</li>
-          <li>Adidas (95)</li>
+      <div className="bg-[#f6f7f8]   border-4 border-black py-4 px-2">
+        <h3 className=" mb-8 text-xl text-black ">Hot Deals</h3>
+        <ul className="space-y-2 text-gray-700 flex flex-col gap-4">
+          <li className="flex justify-between items-center">
+            <span>Nike</span> <span>34</span>
+          </li>
+          <li className="text-[#33A0ff] flex justify-between items-center">
+            <span>Airmax</span> <span>48</span>
+          </li>
+          <li className="flex justify-between items-center">
+            <span>Addidas</span> <span>14</span>
+          </li>
+          <li className="flex justify-between items-center">
+            <span>New Balance</span> <span>23</span>
+          </li>
+          <li className="flex justify-between items-center">
+            <span>Vans</span> <span>2</span>
+          </li>
+          <li className="flex justify-between items-center">
+            <span>All Stars</span> <span>10</span>
+          </li>
+          <li className="flex justify-between items-center">
+            <span>Puma</span> <span>38</span>
+          </li>
         </ul>
       </div>
 

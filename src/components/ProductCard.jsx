@@ -9,7 +9,7 @@ export default function ProductCard({ product, highlightColor }) {
     discountPrice,
     discountPercent,
     ratingValue,
-    ratingCount,
+
     isHot,
     imageUrl,
     colors = [],
@@ -22,22 +22,22 @@ export default function ProductCard({ product, highlightColor }) {
       : "#F6F7F8";
 
   return (
-    <div className="relative border rounded p-4 shadow-sm bg-[#F6F7F8] hover:shadow-lg transition">
+    <div className="relative border rounded md:min-h-[389px] md:min-w-[350px]  shadow-sm bg-white hover:shadow-lg transition">
       {isHot && <Badge text="HOT" />}
       <div
-        className="w-full h-40 flex items-center justify-center rounded"
+        className="w-full max-w-[350px] h-72 flex items-center justify-center rounded"
         style={{ background: bgColor }}
       >
-        <img src={imageUrl} alt={name} className="max-h-32 object-contain" />
+        <img src={imageUrl} alt={name} className="max-h-42 object-contain" />
       </div>
-      <h3 className="mt-4 font-semibold">{name}</h3>
-      <Rating value={ratingValue} count={ratingCount} />
-      <div className="mt-2">
-        <span className="text-blue-600 font-bold mr-2">
+      <h3 className="mt-4 font-semibold text-center text-black">{name}</h3>
+      <Rating value={ratingValue} />
+      <div className="mt-2 text-center">
+        <span className="text-[#40BFFF] font-bold mr-2">
           ${discountPrice.toFixed(2)}
         </span>
-        <span className="line-through text-gray-400">${price.toFixed(2)}</span>
-        <span className="ml-2 text-red-500">{discountPercent}% off</span>
+        <span className="line-through text-gray-300">${price.toFixed(2)}</span>
+        <span className="ml-2 text-[#fb7181]">{discountPercent}% off</span>
       </div>
     </div>
   );
