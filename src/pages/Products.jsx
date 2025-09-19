@@ -35,8 +35,16 @@ export default function Products() {
     }
   }, [sidebarOpen]);
 
+  const clearFilters = () => {
+    setCategory(null);
+    setColor(null);
+    setPriceRange([0, 5299]);
+    setSort("name_asc");
+    setPage(1);
+  };
+
   return (
-    <div className="container w-full px-4 flex flex-col lg:flex-row gap-12 py-8 mt-8 mb-0 relative">
+    <div className="container w-full px-4 flex flex-col lg:flex-row gap-12 py-8 mt-8 mb-0 relative overflow-x-hidden">
       {/* Sidebar */}
       <div
         className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-72 lg:w-72 bg-white z-40 shadow-lg lg:shadow-none overflow-y-auto transform transition-transform duration-300
@@ -109,6 +117,7 @@ export default function Products() {
           setSort={setSort}
           view={view}
           setView={setView}
+          clearFilters={clearFilters}
         />
 
         {/* Product Grid/List */}

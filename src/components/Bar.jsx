@@ -1,7 +1,14 @@
 import React from "react";
-import { Menu, Grid3x3 } from "lucide-react";
+import { Menu, Grid3x3, XCircle } from "lucide-react";
 
-export default function Bar({ totalCount, sort, setSort, view, setView }) {
+export default function Bar({
+  totalCount,
+  sort,
+  setSort,
+  view,
+  setView,
+  clearFilters,
+}) {
   return (
     <div className="flex justify-between items-center bg-[#f6f7f8] px-4 py-2 mt-4">
       {/* Left: Total Items */}
@@ -27,8 +34,15 @@ export default function Bar({ totalCount, sort, setSort, view, setView }) {
         </select>
       </div>
 
-      {/* Right: View Toggle */}
-      <div className="flex gap-2">
+      {/* Right: View Toggle + Clear Filters */}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={clearFilters}
+          className="flex items-center gap-1 px-2 py-1 text-xs font-medium text-red-500 border border-red-300 rounded hover:bg-red-50"
+        >
+          <XCircle size={16} /> Clear All
+        </button>
+
         <div
           onClick={() => setView("grid")}
           className={`cursor-pointer text-sm ${
