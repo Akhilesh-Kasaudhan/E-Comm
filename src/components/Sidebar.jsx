@@ -20,7 +20,6 @@ export default function Sidebar({
     <aside
       className={`h-full lg:h-auto w-72 md:min-w-[288px] bg-white flex flex-col px-4`}
     >
-      {/* Header (only mobile) */}
       <div className="flex items-center justify-between px-4 py-3 border-b lg:hidden">
         <h2 className="font-semibold text-lg">Filters</h2>
         <button onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -28,9 +27,7 @@ export default function Sidebar({
         </button>
       </div>
 
-      {/* Content scrollable on mobile */}
       <div className="flex-1 overflow-y-auto lg:overflow-visible">
-        {/* Hot Deals */}
         <div className="bg-[#f6f7f8] py-6 px-4">
           <h3 className="mb-8 text-xl text-black">Hot Deals</h3>
           <ul className="space-y-8 text-gray-700 text-sm md:text-base">
@@ -61,7 +58,6 @@ export default function Sidebar({
           </ul>
         </div>
 
-        {/* Filters */}
         <FilterPanel
           totalCount={totalCount}
           sort={sort}

@@ -45,7 +45,6 @@ export default function Products() {
 
   return (
     <div className="container w-full px-4 flex flex-col lg:flex-row gap-12 py-8 mt-8 mb-0 relative overflow-x-hidden">
-      {/* Sidebar */}
       <div
         className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-72 lg:w-72 bg-white z-40 shadow-lg lg:shadow-none overflow-y-auto transform transition-transform duration-300
   ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
@@ -66,7 +65,6 @@ export default function Products() {
         />
       </div>
 
-      {/* Overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/30 lg:hidden z-30"
@@ -74,7 +72,6 @@ export default function Products() {
         />
       )}
 
-      {/* Floating Arrow Button (mobile/tablet only) */}
       {!sidebarOpen && (
         <button
           onClick={() => setSidebarOpen(true)}
@@ -84,9 +81,7 @@ export default function Products() {
         </button>
       )}
 
-      {/* Main Section */}
       <main className="flex-1">
-        {/* Hero Section */}
         <div className="h-88 bg-[#40bfff] w-full flex flex-col md:flex-row justify-between gap-4">
           <div className="flex-1 flex flex-col justify-center text-white px-6 md:px-8 max-w-full md:max-w-[400px]">
             <h2 className="text-xl md:text-2xl font-bold">
@@ -100,7 +95,6 @@ export default function Products() {
             </span>
           </div>
 
-          {/* Image (hidden on mobile) */}
           <div className="hidden md:flex flex-1 items-center justify-center">
             <img
               src="/hero.png"
@@ -110,7 +104,6 @@ export default function Products() {
           </div>
         </div>
 
-        {/* Bar Section */}
         <Bar
           totalCount={totalCount}
           sort={sort}
@@ -120,7 +113,6 @@ export default function Products() {
           clearFilters={clearFilters}
         />
 
-        {/* Product Grid/List */}
         <div
           className={`mt-4 gap-6 sm:gap-4 w-full ${
             view === "grid"
@@ -138,7 +130,6 @@ export default function Products() {
           ))}
         </div>
 
-        {/* Pagination */}
         <Pagination
           totalPages={totalPages}
           currentPage={currentPage}

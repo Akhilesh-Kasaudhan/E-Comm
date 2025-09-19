@@ -8,7 +8,6 @@ export function useProducts(allProducts, pageSize = 12) {
   const [color, setColor] = useState(urlParams.get("color") || null);
   const [category, setCategory] = useState(urlParams.get("category") || null);
 
-  // Price range state
   const minFromUrl = Number(urlParams.get("minPrice")) || 0;
   const maxFromUrl =
     Number(urlParams.get("maxPrice")) ||
@@ -16,14 +15,12 @@ export function useProducts(allProducts, pageSize = 12) {
 
   const [priceRange, setPriceRange] = useState([minFromUrl, maxFromUrl]);
 
-  // update URL on change
   const updateURL = (params) => {
     const next = new URLSearchParams(window.location.search);
     Object.entries(params).forEach(([k, v]) => {
       if (!v || (Array.isArray(v) && v.length === 0)) {
         next.delete(k);
       } else if (Array.isArray(v)) {
-        // special handling for price range
         next.set("minPrice", v[0]);
         next.set("maxPrice", v[1]);
       } else {
@@ -40,13 +37,10 @@ export function useProducts(allProducts, pageSize = 12) {
   const filtered = useMemo(() => {
     let res = [...allProducts];
 
-    // category filter
     if (category) res = res.filter((p) => p.category === category);
 
-    // color filter
     if (color) res = res.filter((p) => p.colors.includes(color));
 
-    // price filter (by discountPrice if available, otherwise price)
     if (priceRange && priceRange.length === 2) {
       res = res.filter(
         (p) =>
@@ -55,15 +49,12 @@ export function useProducts(allProducts, pageSize = 12) {
       );
     }
 
-    // sorting
     switch (sort) {
       case "hot":
-        // Hot products first (isHot true → false)
         res.sort((a, b) => (b.isHot === true) - (a.isHot === true));
         break;
 
       case "popular":
-        // Higher ratingValue first
         res.sort((a, b) => b.ratingValue - a.ratingValue);
         break;
 

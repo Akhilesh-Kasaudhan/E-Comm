@@ -14,7 +14,6 @@ export default function FilterPanel({
 
   return (
     <div className="space-y-8 mt-8  bg-white ">
-      {/* Price Range */}
       <div className="flex flex-col justify-center gap-6 min-h-[190px]  bg-[#f6f7f8] px-4 py-2 ">
         <h3 className=" mb-2 uppercase text-xl text-black">Prices</h3>
         <p className="text-sm text-gray-600 mb-1 justify-between flex">

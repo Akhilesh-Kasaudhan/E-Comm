@@ -1,4 +1,3 @@
-import React from "react";
 import { Menu, Grid3x3, XCircle } from "lucide-react";
 
 export default function Bar({
@@ -10,13 +9,11 @@ export default function Bar({
   clearFilters,
 }) {
   return (
-    <div className="flex justify-between items-center bg-[#f6f7f8] px-4 py-2 mt-4">
-      {/* Left: Total Items */}
+    <div className="flex justify-between items-center bg-[#f6f7f8] px-2 sm:gap-4 sm:px-4 py-2 mt-4 gap-2">
       <p className="text-sm text-gray-600">{totalCount} Items</p>
 
-      {/* Middle: Sort By */}
       <div className="flex items-center gap-2">
-        <label htmlFor="sort" className="text-sm text-gray-500">
+        <label htmlFor="sort" className="text-sm text-gray-500 hidden sm:block">
           Sort By:
         </label>
         <select
@@ -34,7 +31,6 @@ export default function Bar({
         </select>
       </div>
 
-      {/* Right: View Toggle + Clear Filters */}
       <div className="flex items-center gap-3">
         <button
           onClick={clearFilters}

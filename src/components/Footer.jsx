@@ -1,7 +1,6 @@
 import React from "react";
 import { Facebook, Twitter } from "lucide-react";
 
-// Reusable column component
 const FooterColumn = ({ title, links }) => {
   return (
     <div className="flex flex-col gap-2">
@@ -9,7 +8,6 @@ const FooterColumn = ({ title, links }) => {
       {links.map((link, i) => (
         <p
           key={i}
-          href="#"
           className="text-sm text-[#22262A] hover:underline cursor-pointer"
         >
           {link}
@@ -19,12 +17,11 @@ const FooterColumn = ({ title, links }) => {
   );
 };
 
-// Social links
 const SocialLinks = () => {
   return (
-    <div className="flex flex-col gap-4 w-[240px]">
-      <h3 className="text-lg font-semibold ">Follow Us</h3>
-      <p className="text-sm text-[#22262A] text-justify">
+    <div className="flex flex-col gap-4">
+      <h3 className="text-lg font-semibold">Follow Us</h3>
+      <p className="text-sm text-[#22262A] text-justify max-w-3xs">
         Since the 1500s, when an unknown printer took a galley of type and
         scrambled.
       </p>
@@ -36,11 +33,10 @@ const SocialLinks = () => {
   );
 };
 
-// Bottom section
 const FooterBottom = () => {
   return (
-    <div className="border-t-2 border-t-gray-300 flex sm:flex-row flex-col gap-8 items-center justify-between py-4 mt-6 ">
-      <p className="text-sm text-[#C1C8CE]">
+    <div className="border-t-2 border-t-gray-300 flex flex-col sm:flex-row gap-4 sm:gap-8 items-center justify-between py-4 mt-6">
+      <p className="text-xs sm:text-sm text-[#C1C8CE] text-center sm:text-left">
         © 2018 Ecommerce theme by www.bisenbaev.com
       </p>
       <div className="flex items-center gap-4">
@@ -69,9 +65,7 @@ const FooterBottom = () => {
   );
 };
 
-// Main Footer
 const Footer = () => {
-  // ✅ JSON for footer columns
   const footerLinks = [
     {
       title: "Information",
@@ -112,38 +106,33 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#bcddfe]  text-[#22262A]  px-20 py-10 mt-0">
-      {/* Top section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-10 ">
-        {/* Logo & description */}
-        <div className="flex flex-col gap-4 ">
+    <footer className="bg-[#bcddfe] text-[#22262A] px-6 sm:px-10 lg:px-20 py-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="flex flex-col gap-4">
           <img src="/logo.png" alt="logo" className="h-8 w-32 object-contain" />
-          <p className="w-[220px] text-sm text-[#22262A] text-justify">
+          <p className="text-sm text-[#22262A] text-justify max-w-3xs">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer.
           </p>
         </div>
 
-        {/* Social links */}
         <SocialLinks />
 
-        {/* Contact info */}
-        <div className="flex flex-col gap-4 w-[150px]">
+        <div className="flex flex-col gap-4">
           <h3 className="text-lg font-semibold">Contact Us</h3>
-          <p className="text-sm text-[#22262A]">
-            E-Comm , 4578 Marmora Road, Glasgow D04 89GR
+          <p className="text-sm text-[#22262A] max-w-3xs">
+            E-Comm, 4578 Marmora Road, Glasgow D04 89GR
           </p>
         </div>
       </div>
-      {/* Footer columns from JSON */}
-      <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-4 mt-8  gap-10 ">
+
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-10">
         {footerLinks.map((col, i) => (
           <FooterColumn key={i} title={col.title} links={col.links} />
         ))}
       </div>
 
-      {/* Bottom section */}
       <FooterBottom />
     </footer>
   );
