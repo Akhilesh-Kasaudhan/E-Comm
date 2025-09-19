@@ -14,18 +14,16 @@ export default function ProductCard({ product, highlightColor, view }) {
     colors = [],
   } = product;
 
-  // Pick highlight only if product actually supports the color
   const bgColor =
     highlightColor && colors.includes(highlightColor)
       ? highlightColor
       : "#F6F7F8";
 
   if (view === "list") {
-    // 🔹 List Layout (image left, details right)
     return (
-      <div className="relative border rounded shadow-sm bg-white hover:shadow-lg transition flex gap-4 p-4 items-center">
+      <div className="relative  shadow-sm bg-white hover:shadow-lg transition flex gap-4 p-4 items-center">
         {isHot && <Badge text="HOT" />}
-        {/* Left Image */}
+
         <div
           className="w-40 h-40 flex items-center justify-center rounded"
           style={{ background: bgColor }}
@@ -33,7 +31,6 @@ export default function ProductCard({ product, highlightColor, view }) {
           <img src={imageUrl} alt={name} className="max-h-36 object-contain" />
         </div>
 
-        {/* Right Details */}
         <div className="flex flex-col flex-1">
           <h3 className="font-semibold text-black text-lg">{name}</h3>
           <Rating value={ratingValue} />
@@ -51,9 +48,8 @@ export default function ProductCard({ product, highlightColor, view }) {
     );
   }
 
-  // 🔹 Default Grid Layout
   return (
-    <div className="relative border rounded md:min-h-[389px] md:min-w-[350px] shadow-sm bg-white hover:shadow-lg transition">
+    <div className="relative  md:min-h-[389px] md:min-w-[350px] shadow-sm bg-white hover:shadow-lg transition">
       {isHot && <Badge text="HOT" />}
       <div
         className="w-full max-w-[350px] h-72 flex items-center justify-center rounded"
