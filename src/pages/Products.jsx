@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import productsData from "../data/products.json";
 import { useProducts } from "../hooks/useProducts";
 import Sidebar from "../components/Sidebar";
 import ProductCard from "../components/ProductCard";
 import Pagination from "../components/Pagination";
+import Bar from "../components/Bar";
 
 export default function Products() {
   const {
@@ -21,9 +22,10 @@ export default function Products() {
     priceRange,
     setPriceRange,
   } = useProducts(productsData, 6);
+  const [view, setView] = useState("grid");
 
   return (
-    <div className="container w-full px-4 flex gap-6 py-8 mt-8">
+    <div className="container w-full px-4 flex gap-6 py-8 mt-8 mb-0">
       {/* Sidebar with filters */}
       <Sidebar
         categories={["Bags", "Belts", "Sneakers"]}
@@ -60,10 +62,30 @@ export default function Products() {
           </div>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4 mt-6">
+        {/* 🔹 Bar Section */}
+        <Bar
+          totalCount={totalCount}
+          sort={sort}
+          setSort={setSort}
+          view={view}
+          setView={setView}
+        />
+
+        {/* Product Grid/List */}
+        <div
+          className={`mt-4 gap-6 sm:gap-4 ${
+            view === "grid"
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+              : "flex flex-col"
+          }`}
+        >
           {visibleProducts.map((p) => (
-            <ProductCard key={p.id} product={p} highlightColor={color} />
+            <ProductCard
+              key={p.id}
+              product={p}
+              highlightColor={color}
+              view={view}
+            />
           ))}
         </div>
 

@@ -12,7 +12,7 @@ export function useProducts(allProducts, pageSize = 12) {
   const minFromUrl = Number(urlParams.get("minPrice")) || 0;
   const maxFromUrl =
     Number(urlParams.get("maxPrice")) ||
-    Math.max(...allProducts.map((p) => p.discountPrice));
+    Math.max(...allProducts.map((p) => p.discountPrice || p.price));
 
   const [priceRange, setPriceRange] = useState([minFromUrl, maxFromUrl]);
 
@@ -20,8 +20,9 @@ export function useProducts(allProducts, pageSize = 12) {
   const updateURL = (params) => {
     const next = new URLSearchParams(window.location.search);
     Object.entries(params).forEach(([k, v]) => {
-      if (!v || (Array.isArray(v) && v.length === 0)) next.delete(k);
-      else if (Array.isArray(v)) {
+      if (!v || (Array.isArray(v) && v.length === 0)) {
+        next.delete(k);
+      } else if (Array.isArray(v)) {
         // special handling for price range
         next.set("minPrice", v[0]);
         next.set("maxPrice", v[1]);
@@ -55,15 +56,40 @@ export function useProducts(allProducts, pageSize = 12) {
     }
 
     // sorting
-    const [field, dir] = sort.split("_");
-    res.sort((a, b) => {
-      let val = 0;
-      if (field === "name") val = a.name.localeCompare(b.name);
-      if (field === "price")
-        val = (a.discountPrice || a.price) - (b.discountPrice || b.price);
-      if (field === "popularity") val = b.ratingCount - a.ratingCount;
-      return dir === "asc" ? val : -val;
-    });
+    switch (sort) {
+      case "hot":
+        // Hot products first (isHot true → false)
+        res.sort((a, b) => (b.isHot === true) - (a.isHot === true));
+        break;
+
+      case "popular":
+        // Higher ratingValue first
+        res.sort((a, b) => b.ratingValue - a.ratingValue);
+        break;
+
+      case "name_asc":
+        res.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+
+      case "name_desc":
+        res.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+
+      case "priceLowToHigh":
+        res.sort(
+          (a, b) => (a.discountPrice || a.price) - (b.discountPrice || b.price)
+        );
+        break;
+
+      case "priceHighToLow":
+        res.sort(
+          (a, b) => (b.discountPrice || b.price) - (a.discountPrice || a.price)
+        );
+        break;
+
+      default:
+        break;
+    }
 
     return res;
   }, [allProducts, category, color, priceRange, sort]);
