@@ -1,11 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import productsData from "../data/products.json";
 import { useProducts } from "../hooks/useProducts";
-import Sidebar from "../components/Sidebar";
-import ProductCard from "../components/ProductCard";
-import Pagination from "../components/Pagination";
-import Bar from "../components/Bar";
 import { ArrowRight } from "lucide-react";
+
+const Sidebar = lazy(() => import("../components/Sidebar"));
+const ProductCard = lazy(() => import("../components/ProductCard"));
+const Pagination = lazy(() => import("../components/Pagination"));
+const Bar = lazy(() => import("../components/Bar"));
+
+function ProductSkeleton({ view }) {
+  return (
+    <div
+      className={`animate-pulse rounded-xl border bg-gray-100 p-4 ${
+        view === "grid" ? "h-64" : "h-40 w-full"
+      }`}
+    >
+      <div className="bg-gray-300 rounded-md h-32 w-full mb-4" />
+      <div className="bg-gray-300 h-4 w-3/4 mb-2 rounded" />
+      <div className="bg-gray-300 h-4 w-1/2 rounded" />
+    </div>
+  );
+}
 
 export default function Products() {
   const {
@@ -44,25 +59,27 @@ export default function Products() {
   };
 
   return (
-    <div className="container w-full px-4 flex flex-col lg:flex-row gap-12 py-8 mt-8 mb-0 relative overflow-x-hidden">
+    <div className="container w-full px-4 flex flex-col lg:flex-row gap-8 py-8 mt-8 mb-0 relative overflow-x-hidden">
       <div
         className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-72 lg:w-72 bg-white z-40 shadow-lg lg:shadow-none overflow-y-auto transform transition-transform duration-300
   ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
-        <Sidebar
-          categories={["Bags", "Belts", "Sneakers"]}
-          selectedCategory={category}
-          onSelectCategory={setCategory}
-          totalCount={totalCount}
-          sort={sort}
-          setSort={setSort}
-          color={color}
-          setColor={setColor}
-          priceRange={priceRange}
-          setPriceRange={setPriceRange}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-        />
+        <Suspense fallback={<div className="p-6">Loading filters...</div>}>
+          <Sidebar
+            categories={["Bags", "Belts", "Sneakers"]}
+            selectedCategory={category}
+            onSelectCategory={setCategory}
+            totalCount={totalCount}
+            sort={sort}
+            setSort={setSort}
+            color={color}
+            setColor={setColor}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            sidebarOpen={sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
+          />
+        </Suspense>
       </div>
 
       {sidebarOpen && (
@@ -75,6 +92,7 @@ export default function Products() {
       {!sidebarOpen && (
         <button
           onClick={() => setSidebarOpen(true)}
+          aria-label="Open filters sidebar"
           className="fixed top-1/2 left-2 z-50 p-2 rounded-full bg-[#40bfff] text-white shadow-md lg:hidden"
         >
           <ArrowRight size={22} />
@@ -98,20 +116,22 @@ export default function Products() {
           <div className="hidden md:flex flex-1 items-center justify-center">
             <img
               src="/hero.png"
-              alt="hero"
+              alt="Adidas Men Running Sneakers promotional banner"
               className="max-h-40 md:max-h-56 object-contain -rotate-y-180"
             />
           </div>
         </div>
 
-        <Bar
-          totalCount={totalCount}
-          sort={sort}
-          setSort={setSort}
-          view={view}
-          setView={setView}
-          clearFilters={clearFilters}
-        />
+        <Suspense fallback={<div className="p-4">Loading toolbar...</div>}>
+          <Bar
+            totalCount={totalCount}
+            sort={sort}
+            setSort={setSort}
+            view={view}
+            setView={setView}
+            clearFilters={clearFilters}
+          />
+        </Suspense>
 
         <div
           className={`mt-4 gap-6 sm:gap-4 w-full ${
@@ -120,21 +140,39 @@ export default function Products() {
               : "flex flex-col"
           }`}
         >
-          {visibleProducts.map((p) => (
-            <ProductCard
-              key={p.id}
-              product={p}
-              highlightColor={color}
-              view={view}
-            />
-          ))}
+          <Suspense
+            fallback={Array.from({ length: 6 }).map((_, i) => (
+              <ProductSkeleton key={i} view={view} />
+            ))}
+          >
+            {visibleProducts.length > 0 ? (
+              visibleProducts.map((p) => (
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  highlightColor={color}
+                  view={view}
+                />
+              ))
+            ) : (
+              <div
+                role="status"
+                aria-live="polite"
+                className="col-span-full text-center text-gray-500 py-12"
+              >
+                No products found for the selected filters.
+              </div>
+            )}
+          </Suspense>
         </div>
 
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          setPage={setPage}
-        />
+        <Suspense fallback={<div className="p-6 text-center">Loading...</div>}>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setPage={setPage}
+          />
+        </Suspense>
       </main>
     </div>
   );

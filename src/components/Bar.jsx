@@ -9,10 +9,10 @@ export default function Bar({
   clearFilters,
 }) {
   return (
-    <div className="flex justify-between items-center bg-[#f6f7f8] px-2 sm:gap-4 sm:px-4 py-2 mt-4 gap-2">
+    <div className="flex justify-between items-center bg-[#f6f7f8] px-2 sm:gap-4 sm:px-4 py-2 mt-4 ">
       <p className="text-sm text-gray-600">{totalCount} Items</p>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center sm:gap-2">
         <label htmlFor="sort" className="text-sm text-gray-500 hidden sm:block">
           Sort By:
         </label>
@@ -20,7 +20,7 @@ export default function Bar({
           id="sort"
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="border-2 border-gray-200 bg-white rounded px-2 py-1 text-sm outline-none text-black"
+          className="border-2 border-gray-200 bg-white rounded sm:px-2 py-1 text-sm outline-none text-black"
         >
           <option value="hot">Hot</option>
           <option value="popular">Popular</option>
@@ -31,7 +31,7 @@ export default function Bar({
         </select>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center ">
         <button
           onClick={clearFilters}
           className="flex items-center gap-1 px-2 py-1 text-xs font-medium text-red-500 border border-red-300 rounded hover:bg-red-50"

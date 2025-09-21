@@ -9,3 +9,7 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: #fff;
 }
+
+.focus-visible:outline-none {
+  @apply ring-2 ring-offset-2 ring-[#40bfff];
+}
