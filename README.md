@@ -1,4 +1,4 @@
-# E-Commerce Product Listing Page
+# E-Commerce Product Listing Page – Frontend Internship Test
 
 This project is a **frontend assignment** built with **React + Vite** that recreates a pixel-perfect, responsive product listing screen based on the provided Figma design.  
 It demonstrates **clean reusable components**, **filters, sorting, and pagination**, and ensures accessibility and responsiveness across devices.
@@ -81,6 +81,8 @@ Each product contains:
   "imageUrl": "https://..."
 }
 ```
+
+## Project Structure:
 
 client/
 ├── public/ # Static assets (logos, icons, images)
