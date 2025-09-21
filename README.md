@@ -1,12 +1,83 @@
-# React + Vite
+# 🛍️ E-Commerce Product Listing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a **frontend assignment** built with **React + Vite** that recreates a pixel-perfect, responsive product listing screen based on the provided Figma design.  
+It demonstrates **clean reusable components**, **filters, sorting, and pagination**, and ensures accessibility and responsiveness across devices.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 Goal
 
-## Expanding the ESLint configuration
+Recreate the product listing screen from the Figma with:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Pixel-accurate UI
+- Clean, reusable components
+- Fully working filters, sort, and pagination
+- Responsive layouts across desktop, tablet, and mobile
+
+---
+
+## ✨ Features & Scope
+
+### 🔹 Reusable Components
+
+- `Navbar`, `Sidebar`, `FilterPanel`, `ProductCard`, `Badge`, `Rating`, `Pagination`, `Footer`
+- Configurable via props and styled to match design
+
+### 🔹 Sidebar Filters (expand/collapse)
+
+- Categories expand/collapse intuitively
+- At least 6 items shown (placeholders or “View more” pattern if fewer)
+
+### 🔹 Product Listing Grid
+
+- Grid layout matches Figma breakpoints and spacing
+- Each product card includes:
+  - Product image (placeholder if needed)
+  - HOT badge
+  - Title
+  - Original price, discount price, discount percent
+  - Rating (stars + count)
+  - Quick actions (wishlist/compare if applicable)
+
+### 🔹 Color Selection
+
+- Color swatches (chips) to filter products
+- Selected color highlights product cards with a visible background update
+
+### 🔹 Sorting & Pagination
+
+- Sort by Name, Price, Popularity (asc/desc)
+- Client-side pagination with active page highlighting
+- State sync with URL query params (optional)
+
+### 🔹 Responsiveness
+
+- Desktop, tablet, and mobile layouts tested at `320px`, `768px`, `1024px`
+- Sidebar collapses into a drawer on smaller screens
+
+### 🔹 Footer
+
+- Implemented exactly as in Figma (links, layout, spacing)
+
+---
+
+## 📊 Dataset
+
+Located in `src/data/products.json`  
+Each product contains:
+
+```json
+{
+  "id": 1,
+  "name": "Urban Explorer Backpack",
+  "price": 4999,
+  "discountPrice": 3599,
+  "discountPercent": 28,
+  "ratingValue": 4.4,
+  "ratingCount": 130,
+  "isHot": true,
+  "colors": ["black", "blue", "grey"],
+  "category": "Bags",
+  "imageUrl": "https://..."
+}
+```
